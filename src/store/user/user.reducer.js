@@ -6,7 +6,7 @@ export const USER_INITIAL_STATE = {
 
 export const userReducer = (
   state = USER_INITIAL_STATE,
-  action
+  action = {},
 ) => {
   const { type, payload } = action;
 
