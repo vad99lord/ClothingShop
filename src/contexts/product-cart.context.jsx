@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useReducer } from "react";
 import { useEffect } from "react";
 
 const productEquals = (thisProduct, thatProduct) =>
@@ -61,35 +61,100 @@ export const ProductCartContext = createContext({
   cartTotal: 0,
 });
 
+export const PRODUCT_CART_ACTION_TYPES = {
+  SET_IS_CART_OPEN: "SET_IS_CART_OPEN",
+  ADD_ITEM_TO_CART: "ADD_ITEM_TO_CART",
+  DECREASE_CART_ITEM: "DECREASE_CART_ITEM",
+  REMOVE_CART_ITEM: "REMOVE_CART_ITEM",
+  SET_CART_TOTAL: "SET_CART_TOTAL",
+  SET_CART_ITEMS_COUNT: "SET_CART_ITEMS_COUNT",
+};
+
+const INITIAL_STATE = {
+  isCartOpen: false,
+  cartItems: [],
+  cartItemsCount: 0,
+  cartTotal: 0,
+};
+
+const productCartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case PRODUCT_CART_ACTION_TYPES.SET_IS_CART_OPEN: {
+      return { ...state, isCartOpen: payload };
+    }
+    case PRODUCT_CART_ACTION_TYPES.ADD_ITEM_TO_CART: {
+      const newCartItems = addCartItem(state.cartItems, payload);
+      return { ...state, cartItems: newCartItems };
+    }
+    case PRODUCT_CART_ACTION_TYPES.DECREASE_CART_ITEM: {
+      const newCartItems = decreaseCartItem(state.cartItems, payload);
+      return { ...state, cartItems: newCartItems };
+    }
+    case PRODUCT_CART_ACTION_TYPES.REMOVE_CART_ITEM: {
+      const newCartItems = removeCartItem(state.cartItems, payload);
+      return { ...state, cartItems: newCartItems };
+    }
+    case PRODUCT_CART_ACTION_TYPES.SET_CART_TOTAL: {
+      const newCartTotal = getCartTotal(payload);
+      return { ...state, cartTotal: newCartTotal };
+    }
+    case PRODUCT_CART_ACTION_TYPES.SET_CART_ITEMS_COUNT: {
+      const newCartItemsCount = payload.reduce(
+        (itemsCount, currentValue) =>
+          itemsCount + currentValue.quantity,
+        0
+      );
+      console.log(newCartItemsCount);
+      return { ...state, cartItemsCount: newCartItemsCount };
+    }
+    default:
+      throw new Error(`Unhandled type ${type} in productCartReducer`);
+  }
+};
+
 export const ProductCartProvider = ({ children }) => {
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartItemsCount, setCartItemsCount] = useState(0);
-  const [cartTotal, setCartTotal] = useState(0);
+  const [
+    { isCartOpen, cartItems, cartItemsCount, cartTotal },
+    dispatch,
+  ] = useReducer(productCartReducer, INITIAL_STATE);
+  const setIsCartOpen = (isCartOpen) =>
+    dispatch({
+      type: PRODUCT_CART_ACTION_TYPES.SET_IS_CART_OPEN,
+      payload: isCartOpen,
+    });
+  const setCartItemsCount = (cartItems) =>
+    dispatch({
+      type: PRODUCT_CART_ACTION_TYPES.SET_CART_ITEMS_COUNT,
+      payload: cartItems,
+    });
+  const setCartTotal = (cartItems) =>
+    dispatch({
+      type: PRODUCT_CART_ACTION_TYPES.SET_CART_TOTAL,
+      payload: cartItems,
+    });
   useEffect(() => {
-    const newCartTotal = getCartTotal(cartItems);
-    setCartTotal(newCartTotal);
+    setCartTotal(cartItems);
   }, [cartItems]);
   useEffect(() => {
-    const newCartItemsCount = cartItems.reduce(
-      (itemsCount, currentValue) =>
-        itemsCount + currentValue.quantity,
-      0
-    );
-    setCartItemsCount(newCartItemsCount);
+    setCartItemsCount(cartItems);
   }, [cartItems]);
-
-  const addItemToCart = (productToAdd) => {
-    setCartItems(addCartItem(cartItems, productToAdd));
-  };
-
-  const decreaseItemFromCart = (productToDecrease) => {
-    setCartItems(decreaseCartItem(cartItems, productToDecrease));
-  };
-
-  const removeItemFromCart = (productToRemove) => {
-    setCartItems(removeCartItem(cartItems, productToRemove));
-  };
+  const addItemToCart = (productToAdd) =>
+    dispatch({
+      type: PRODUCT_CART_ACTION_TYPES.ADD_ITEM_TO_CART,
+      payload: productToAdd,
+    });
+  const decreaseItemFromCart = (productToDecrease) =>
+    dispatch({
+      type: PRODUCT_CART_ACTION_TYPES.DECREASE_CART_ITEM,
+      payload: productToDecrease,
+    });
+  const removeItemFromCart = (productToRemove) =>
+    dispatch({
+      type: PRODUCT_CART_ACTION_TYPES.REMOVE_CART_ITEM,
+      payload: productToRemove,
+    });
 
   const value = {
     isCartOpen,
