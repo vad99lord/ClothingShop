@@ -10,4 +10,6 @@ export enum USER_ACTION_TYPES {
   SIGN_OUT_START = "user/SIGN_UP_START",
   SIGN_OUT_FAILED = "user/SIGN_OUT_FAILED",
   SIGN_OUT_SUCCESS = "user/SIGN_OUT_SUCCESS",
-};
+}
+
+export default USER_ACTION_TYPES;
