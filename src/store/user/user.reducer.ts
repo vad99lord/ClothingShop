@@ -1,4 +1,5 @@
 import { AnyAction } from "redux";
+import { UserData } from "../../utils/firebase/firebase.utils";
 import {
   signInFailed,
   signInSuccess,
@@ -6,10 +7,9 @@ import {
   signOutSuccess,
   signUpFailed,
 } from "./user.actions";
-import { User } from "./user.types";
 
 type MutableUserState = {
-  currentUser: User | null;
+  currentUser: UserData | null;
   isLoading: boolean;
   error: Error | null;
 };

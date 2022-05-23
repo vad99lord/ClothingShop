@@ -1,20 +1,35 @@
 import {
+  ActionWithPayload,
   createAction,
   withMatcher,
 } from "../../utils/reducer/reducer.utils";
+import { CategoryItem } from "../categories/category.types";
 import { CartItem, CART_ACTION_TYPES } from "./cart.types";
 
-export const setIsCartOpen = withMatcher((isCartOpen: boolean) => {
-  return createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isCartOpen);
-});
+export type SetCartIsOpen = ActionWithPayload<
+  CART_ACTION_TYPES.SET_IS_CART_OPEN,
+  boolean
+>;
+
+export type SetCartItems = ActionWithPayload<
+  CART_ACTION_TYPES.SET_CART_ITEMS,
+  CartItem[]
+>;
+
+export const setIsCartOpen = withMatcher(
+  (isCartOpen: boolean): SetCartIsOpen =>
+    createAction(CART_ACTION_TYPES.SET_IS_CART_OPEN, isCartOpen)
+);
+
+export const setCartItems = withMatcher(
+  (cartItems: CartItem[]): SetCartItems =>
+    createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)
+);
 
 export const addItemToCart = withMatcher(
   (cartItems: CartItem[], productToAdd: CartItem) => {
     const newCartItems = addCartItem(cartItems, productToAdd);
-    return createAction(
-      CART_ACTION_TYPES.SET_CART_ITEMS,
-      newCartItems
-    );
+    return setCartItems(newCartItems);
   }
 );
 export const decreaseItemFromCart = withMatcher(
@@ -23,30 +38,24 @@ export const decreaseItemFromCart = withMatcher(
       cartItems,
       productToDecrease
     );
-    return createAction(
-      CART_ACTION_TYPES.SET_CART_ITEMS,
-      newCartItems
-    );
+    return setCartItems(newCartItems);
   }
 );
 export const removeItemFromCart = withMatcher(
   (cartItems: CartItem[], productToRemove: CartItem) => {
     const newCartItems = removeCartItem(cartItems, productToRemove);
-    return createAction(
-      CART_ACTION_TYPES.SET_CART_ITEMS,
-      newCartItems
-    );
+    return setCartItems(newCartItems);
   }
 );
 
 const productEquals = (
-  thisProduct: CartItem,
-  thatProduct: CartItem
+  thisProduct: CartItem | CategoryItem,
+  thatProduct: CartItem | CategoryItem
 ) => thisProduct.id === thatProduct.id;
 
 const addCartItem = (
   cartItems: CartItem[],
-  productToAdd: CartItem
+  productToAdd: CategoryItem
 ): CartItem[] => {
   let productToAddExists = false;
   const newCartItems = cartItems.map((cartItem) => {
@@ -65,7 +74,7 @@ const addCartItem = (
 
 const decreaseCartItem = (
   cartItems: CartItem[],
-  productToDecrease: CartItem
+  productToDecrease: CategoryItem
 ): CartItem[] => {
   const currentProductToDecrease = cartItems.find((cartItem) =>
     productEquals(cartItem, productToDecrease)

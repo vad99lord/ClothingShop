@@ -1,11 +1,6 @@
 import { AnyAction } from "redux";
+import { setCartItems, setIsCartOpen } from "./cart.actions";
 import { CartItem } from "./cart.types";
-import {
-  addItemToCart,
-  decreaseItemFromCart,
-  removeItemFromCart,
-  setIsCartOpen,
-} from "./cart.actions";
 
 type MutableCartState = {
   isCartOpen: boolean;
@@ -19,24 +14,16 @@ export const CART_INITIAL_STATE: CartState = {
   cartItems: [],
 };
 
-const setCartItemsActions = [
-  addItemToCart,
-  decreaseItemFromCart,
-  removeItemFromCart,
-];
-
 export const cartReducer = (
   state = CART_INITIAL_STATE,
-  action = {} as AnyAction
+  action: AnyAction
 ): CartState => {
-  setCartItemsActions.forEach((actionMatcher) => {
-    if (actionMatcher.match(action)) {
-      return {
-        ...state,
-        cartItems: action.payload,
-      };
-    }
-  });
+  if (setCartItems.match(action)) {
+    return {
+      ...state,
+      cartItems: action.payload,
+    };
+  }
   if (setIsCartOpen.match(action)) {
     return {
       ...state,

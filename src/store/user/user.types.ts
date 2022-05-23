@@ -11,9 +11,3 @@ export enum USER_ACTION_TYPES {
   SIGN_OUT_FAILED = "user/SIGN_OUT_FAILED",
   SIGN_OUT_SUCCESS = "user/SIGN_OUT_SUCCESS",
 };
-
-export type User = {
-  id: string;
-  displayName: string;
-  email: string;
-};
