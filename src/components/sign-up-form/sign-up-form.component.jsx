@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { emailSignUpStart } from "../../store/user/user.actions";
+import { emailSignUpStart } from "../../store/user/user.actions.ts";
 import Button from "../button/button.component";
 import FormInput from "../form-input/form-input.component";
 import { SignUpContainer } from "./sign-up-form.styles";

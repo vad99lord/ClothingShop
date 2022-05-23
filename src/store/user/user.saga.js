@@ -13,7 +13,7 @@ import {
   signOutFailed,
   signOutSuccess,
   signUpFailed,
-} from "./user.actions";
+} from "./user.actions.ts";
 import USER_ACTION_TYPES from "./user.types";
 
 export function* getSnapshotFromUserAuth(
