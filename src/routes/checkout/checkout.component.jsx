@@ -4,7 +4,7 @@ import PaymentForm from "../../components/payment-form/payment-form.component";
 import {
   selectCartItems,
   selectCartTotal,
-} from "../../store/cart/cart.selectors";
+} from "../../store/cart/cart.selectors.ts";
 import {
   CheckoutContainer,
   CheckoutHeader,

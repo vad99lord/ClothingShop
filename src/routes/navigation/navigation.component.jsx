@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { ReactComponent as CrwnLogo } from "../../assets/crown.svg";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
 import CartIcon from "../../components/cart-icon/cart-icon.component";
-import { selectIsCartOpen } from "../../store/cart/cart.selectors";
+import { selectIsCartOpen } from "../../store/cart/cart.selectors.ts";
 import { signOutStart } from "../../store/user/user.actions";
 import { selectCurrentUser } from "../../store/user/user.selectors";
 import {

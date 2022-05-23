@@ -4,7 +4,7 @@ import {
   decreaseItemFromCart,
   removeItemFromCart,
 } from "../../store/cart/cart.actions";
-import { selectCartItems } from "../../store/cart/cart.selectors";
+import { selectCartItems } from "../../store/cart/cart.selectors.ts";
 import {
   Arrow,
   BaseSpan,

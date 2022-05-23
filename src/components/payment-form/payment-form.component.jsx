@@ -13,7 +13,7 @@ import {
   PaymentFormContainer,
 } from "./payment-form.styles";
 
-import { selectCartTotal } from "../../store/cart/cart.selectors";
+import { selectCartTotal } from "../../store/cart/cart.selectors.ts";
 
 import { selectCurrentUser } from "../../store/user/user.selectors";
 import { useState } from "react";

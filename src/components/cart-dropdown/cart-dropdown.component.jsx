@@ -9,7 +9,7 @@ import CartItem from "../cart-item/cart-item.component";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { selectCartItems } from "../../store/cart/cart.selectors";
+import { selectCartItems } from "../../store/cart/cart.selectors.ts";
 
 const CartDropdown = () => {
   const cartItems = useSelector(selectCartItems);
