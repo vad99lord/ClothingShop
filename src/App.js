@@ -8,7 +8,7 @@ import Navigation from "./routes/navigation/navigation.component";
 import Shop from "./routes/shop/shop.component";
 import {
   checkUserSession
-} from "./store/user/user.actions.ts";
+} from "./store/user/user.actions";
 
 const App = () => {
   const dispatch = useDispatch();

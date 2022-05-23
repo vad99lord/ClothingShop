@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { addItemToCart } from "../../store/cart/cart.actions";
-import { selectCartItems } from "../../store/cart/cart.selectors.ts";
+import { selectCartItems } from "../../store/cart/cart.selectors";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../button/button.component";
@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
     const action = addItemToCart(cartItems, product);
     console.log(action);
     dispatch(action);
-}
+  };
   return (
     <ProductCartContainer>
       <img src={imageUrl} alt={`${name}`} />

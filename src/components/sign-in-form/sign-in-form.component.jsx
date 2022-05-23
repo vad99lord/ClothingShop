@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import {
   emailSignInStart,
   googleSignInStart,
-} from "../../store/user/user.actions.ts";
+} from "../../store/user/user.actions";
 import Button, {
   BUTTON_TYPE_CLASSES,
 } from "../button/button.component";

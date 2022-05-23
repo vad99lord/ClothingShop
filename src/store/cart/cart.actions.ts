@@ -26,28 +26,6 @@ export const setCartItems = withMatcher(
     createAction(CART_ACTION_TYPES.SET_CART_ITEMS, cartItems)
 );
 
-export const addItemToCart = withMatcher(
-  (cartItems: CartItem[], productToAdd: CartItem) => {
-    const newCartItems = addCartItem(cartItems, productToAdd);
-    return setCartItems(newCartItems);
-  }
-);
-export const decreaseItemFromCart = withMatcher(
-  (cartItems: CartItem[], productToDecrease: CartItem) => {
-    const newCartItems = decreaseCartItem(
-      cartItems,
-      productToDecrease
-    );
-    return setCartItems(newCartItems);
-  }
-);
-export const removeItemFromCart = withMatcher(
-  (cartItems: CartItem[], productToRemove: CartItem) => {
-    const newCartItems = removeCartItem(cartItems, productToRemove);
-    return setCartItems(newCartItems);
-  }
-);
-
 const productEquals = (
   thisProduct: CartItem | CategoryItem,
   thatProduct: CartItem | CategoryItem
@@ -101,4 +79,28 @@ const removeCartItem = (
   return cartItems.filter(
     (cartItem) => !productEquals(cartItem, productToRemove)
   );
+};
+
+export const addItemToCart = (
+  cartItems: CartItem[],
+  productToAdd: CartItem
+) => {
+  const newCartItems = addCartItem(cartItems, productToAdd);
+  return setCartItems(newCartItems);
+};
+
+export const decreaseItemFromCart = (
+  cartItems: CartItem[],
+  productToDecrease: CartItem
+) => {
+  const newCartItems = decreaseCartItem(cartItems, productToDecrease);
+  return setCartItems(newCartItems);
+};
+
+export const removeItemFromCart = (
+  cartItems: CartItem[],
+  productToRemove: CartItem
+) => {
+  const newCartItems = removeCartItem(cartItems, productToRemove);
+  return setCartItems(newCartItems);
 };
