@@ -27,8 +27,8 @@ export const setCartItems = withMatcher(
 );
 
 const productEquals = (
-  thisProduct: CartItem | CategoryItem,
-  thatProduct: CartItem | CategoryItem
+  thisProduct: CategoryItem,
+  thatProduct: CategoryItem
 ) => thisProduct.id === thatProduct.id;
 
 const addCartItem = (
@@ -83,7 +83,7 @@ const removeCartItem = (
 
 export const addItemToCart = (
   cartItems: CartItem[],
-  productToAdd: CartItem
+  productToAdd: CategoryItem
 ) => {
   const newCartItems = addCartItem(cartItems, productToAdd);
   return setCartItems(newCartItems);

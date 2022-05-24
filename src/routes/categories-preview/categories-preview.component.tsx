@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { FC, Fragment } from "react";
 import { useSelector } from "react-redux";
 import CategoryPreview from "../../components/category-preview/category-preview.component";
 import Spinner from "../../components/spinner/spinner.component";
@@ -7,7 +7,7 @@ import {
   selectCategoriesMap,
 } from "../../store/categories/category.selectors";
 
-const CategoriesPreview = () => {
+const CategoriesPreview : FC = () => {
   const categoriesMap = useSelector(selectCategoriesMap);
   const isLoading = useSelector(selectCategoriesIsLoading);
   return (
