@@ -14,7 +14,6 @@ export type DirectoryItemProps = {
 const DirectoryItem : FC<DirectoryItemProps> = ({ category }) => {
   const { imageUrl, title, route } = category;
   const navigate = useNavigate();
-  console.log(route);
   const onNavigateHandler = () => navigate(route);
   return (
     <DirectoryItemContainer onClick={onNavigateHandler}>

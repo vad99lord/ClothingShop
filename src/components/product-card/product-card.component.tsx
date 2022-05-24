@@ -23,7 +23,6 @@ const ProductCard: FC<ProductCardProps> = ({ product }) => {
   const cartItems = useSelector(selectCartItems);
   const addProductToCart = () => {
     const action = addItemToCart(cartItems, product);
-    console.log(action);
     dispatch(action);
   };
   return (

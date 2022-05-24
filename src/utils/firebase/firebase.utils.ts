@@ -9,19 +9,17 @@ import {
   signInWithPopup,
   signInWithRedirect,
   signOut,
-  User as FirebaseUser,
+  User as FirebaseUser
 } from "firebase/auth";
 import {
   collection,
-  doc,
-  DocumentData,
-  getDoc,
+  doc, getDoc,
   getDocs,
   getFirestore,
   query,
   QueryDocumentSnapshot,
   setDoc,
-  writeBatch,
+  writeBatch
 } from "firebase/firestore";
 import { Category } from "../../store/categories/category.types";
 
@@ -34,7 +32,7 @@ const firebaseConfig = {
   appId: "1:637285515752:web:4b51d0c509c3676ac7a45d",
 };
 
-const firebaseApp = initializeApp(firebaseConfig);
+initializeApp(firebaseConfig);
 
 const googleProvider = new GoogleAuthProvider();
 
