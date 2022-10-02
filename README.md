@@ -14,7 +14,11 @@ Sample online store website offering several categories of items, with add to ca
 
 5. Stripe API
 
-### Deploy: 
+## Deploy: 
 
 Deployed with [Netlify](https://clothing-shop-project.netlify.app/)
+
+## Screens:
+
+![product screen](imgs/product_screen.png)
 
